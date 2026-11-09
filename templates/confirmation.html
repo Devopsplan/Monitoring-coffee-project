@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Order confirmed — CoffeeCraft Roastery{% endblock %}
+
+{% block content %}
+<section class="confirmation wrap">
+  <p class="eyebrow">Order #{{ order.id }}</p>
+  <h1>Thanks, {{ order.name }}. It's going in the drum.</h1>
+  <p class="section-sub">A receipt would be on its way to {{ order.email }} if this were wired to a real inbox.</p>
+
+  <aside class="receipt receipt-standalone">
+    <p class="receipt-title">Order #{{ order.id }}</p>
+    {% for item in order.lines %}
+    <div class="receipt-row">
+      <span>{{ item.qty }} &times; {{ item.name }}</span>
+      <span>${{ '%.2f' | format(item.line_total) }}</span>
+    </div>
+    {% endfor %}
+    <div class="receipt-divider"></div>
+    <div class="receipt-row"><span>Subtotal</span><span>${{ '%.2f' | format(order.subtotal) }}</span></div>
+    <div class="receipt-row">
+      <span>Shipping</span>
+      <span>{% if order.shipping == 0 %}Free{% else %}${{ '%.2f' | format(order.shipping) }}{% endif %}</span>
+    </div>
+    <div class="receipt-divider"></div>
+    <div class="receipt-row receipt-total"><span>Total</span><span>${{ '%.2f' | format(order.total) }}</span></div>
+  </aside>
+
+  <a class="btn btn-primary" href="{{ url_for('index') }}">Back to the catalog</a>
+</section>
+{% endblock %}

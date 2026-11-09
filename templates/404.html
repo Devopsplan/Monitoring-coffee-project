@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Not found — CoffeeCraft Roastery{% endblock %}
+
+{% block content %}
+<section class="wrap not-found">
+  <p class="eyebrow">Error 404</p>
+  <h1>This lot sold out.</h1>
+  <p class="section-sub">There's nothing at this address. Head back and pick another origin.</p>
+  <a class="btn btn-primary" href="{{ url_for('index') }}">Back to the catalog</a>
+</section>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Checkout — CoffeeCraft Roastery{% endblock %}
+
+{% block content %}
+<section class="checkout-page wrap">
+  <h1>Checkout</h1>
+  <p class="section-sub">This is a demo storefront &mdash; no payment is actually processed.</p>
+
+  <div class="cart-grid">
+    <form class="checkout-form" method="post" action="{{ url_for('checkout') }}">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required placeholder="Ada Lovelace">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required placeholder="ada@example.com">
+
+      <label for="address">Shipping address</label>
+      <input type="text" id="address" name="address" required placeholder="12 Analytical Engine Way">
+
+      <div class="form-row">
+        <div>
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" required>
+        </div>
+        <div>
+          <label for="zip">Postal code</label>
+          <input type="text" id="zip" name="zip" required>
+        </div>
+      </div>
+
+      <label for="card">Card number</label>
+      <input type="text" id="card" name="card" placeholder="4242 4242 4242 4242" maxlength="19">
+
+      <button type="submit" class="btn btn-primary btn-block">Place order &mdash; ${{ '%.2f' | format(cart.total) }}</button>
+    </form>
+
+    <aside class="receipt">
+      <p class="receipt-title">Order summary</p>
+      {% for item in cart.lines %}
+      <div class="receipt-row">
+        <span>{{ item.qty }} &times; {{ item.name }}</span>
+        <span>${{ '%.2f' | format(item.line_total) }}</span>
+      </div>
+      {% endfor %}
+      <div class="receipt-divider"></div>
+      <div class="receipt-row"><span>Subtotal</span><span>${{ '%.2f' | format(cart.subtotal) }}</span></div>
+      <div class="receipt-row">
+        <span>Shipping</span>
+        <span>{% if cart.shipping == 0 %}Free{% else %}${{ '%.2f' | format(cart.shipping) }}{% endif %}</span>
+      </div>
+      <div class="receipt-divider"></div>
+      <div class="receipt-row receipt-total"><span>Total</span><span>${{ '%.2f' | format(cart.total) }}</span></div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

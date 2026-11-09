@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "name": "Yirgacheffe Dawn",
+    "origin": "Yirgacheffe, Ethiopia",
+    "altitude": "1,900\u20132,200 m",
+    "process": "Washed",
+    "roast": 2,
+    "notes": ["Bergamot", "Jasmine", "Peach"],
+    "price": 18.50,
+    "weight": "340g",
+    "color": "#C89B5C",
+    "description": "A bright, floral single origin picked at peak ripeness in the highlands of Gedeo. Washed for clarity, roasted light to preserve its citrus lift and tea-like body."
+  },
+  {
+    "id": 2,
+    "name": "Huila Midnight",
+    "origin": "Huila, Colombia",
+    "altitude": "1,700\u20131,950 m",
+    "process": "Anaerobic",
+    "roast": 4,
+    "notes": ["Dark cherry", "Cocoa", "Molasses"],
+    "price": 19.75,
+    "weight": "340g",
+    "color": "#8B5A2B",
+    "description": "Fermented in sealed tanks before drying, this lot carries a deep, wine-like fruit character balanced by a cocoa-forward finish. Roasted medium-dark for body."
+  },
+  {
+    "id": 3,
+    "name": "Toraja Longhouse",
+    "origin": "Tana Toraja, Sulawesi",
+    "altitude": "1,400\u20131,600 m",
+    "process": "Wet-hulled",
+    "roast": 5,
+    "notes": ["Cedar", "Dark chocolate", "Clove"],
+    "price": 21.00,
+    "weight": "340g",
+    "color": "#5B3A29",
+    "description": "Traditional wet-hulling gives this Sulawesi lot its low acidity and heavy, syrupy body. Dark roasted for a smoky, spice-driven cup that holds up to milk."
+  },
+  {
+    "id": 4,
+    "name": "Tarrazu Sunrise",
+    "origin": "Tarraz\u00fa, Costa Rica",
+    "altitude": "1,600\u20131,850 m",
+    "process": "Honey",
+    "roast": 3,
+    "notes": ["Red apple", "Brown sugar", "Almond"],
+    "price": 17.25,
+    "weight": "340g",
+    "color": "#B97A3C",
+    "description": "Honey-processed on raised beds above the Los Santos valley. A clean, balanced everyday cup with a sweet, nutty finish. Our most popular roast."
+  },
+  {
+    "id": 5,
+    "name": "Kivu Highlands",
+    "origin": "Lake Kivu, Rwanda",
+    "altitude": "1,700\u20132,000 m",
+    "process": "Washed",
+    "roast": 2,
+    "notes": ["Red currant", "Black tea", "Lime"],
+    "price": 20.50,
+    "weight": "340g",
+    "color": "#C2A16B",
+    "description": "Grown on volcanic soil beside Lake Kivu, this lot is meticulously hand-sorted. Light roasted to spotlight its crisp, currant-driven acidity."
+  },
+  {
+    "id": 6,
+    "name": "Chiapas Nightfall",
+    "origin": "Chiapas, Mexico",
+    "altitude": "1,200\u20131,500 m",
+    "process": "Natural",
+    "roast": 5,
+    "notes": ["Dried fig", "Tobacco", "Bittersweet cocoa"],
+    "price": 16.75,
+    "weight": "340g",
+    "color": "#4A2E1F",
+    "description": "Sun-dried on patios in the Sierra Madre, this natural-process lot is roasted dark for a bold, low-acid cup with heavy fruit and a smoky finish."
+  }
+]

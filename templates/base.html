@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}CoffeeCraft Roastery{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="wordmark" href="{{ url_for('index') }}">
+      <span class="wordmark-mark">&#9679;</span> CoffeeCraft
+    </a>
+    <nav class="main-nav">
+      <a href="{{ url_for('index') }}#catalog">Catalog</a>
+      <a href="{{ url_for('index') }}#about">About</a>
+      <a class="bag-link" href="{{ url_for('view_cart') }}">
+        Bag <span class="bag-count">{{ cart_count }}</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-stack wrap">
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="footer-word">CoffeeCraft Roastery</p>
+      <p class="footer-note">Small batches, roasted weekly &mdash; est. this afternoon, in a Flask app.</p>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <p class="footer-heading">Roastery</p>
+        <p>Origins</p>
+        <p>Subscriptions</p>
+        <p>Wholesale</p>
+      </div>
+      <div>
+        <p class="footer-heading">Support</p>
+        <p>Shipping</p>
+        <p>Returns</p>
+        <p>Contact</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

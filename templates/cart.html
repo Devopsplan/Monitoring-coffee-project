@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Your bag — CoffeeCraft Roastery{% endblock %}
+
+{% block content %}
+<section class="cart-page wrap">
+  <h1>Your bag</h1>
+
+  {% if not cart.lines %}
+  <div class="empty-state">
+    <p>Your bag is empty. Nothing roasting in here yet.</p>
+    <a class="btn btn-primary" href="{{ url_for('index') }}">Browse the catalog</a>
+  </div>
+  {% else %}
+  <div class="cart-grid">
+    <div class="cart-lines">
+      {% for item in cart.lines %}
+      <div class="cart-line">
+        <span class="cart-line-swatch" style="background: {{ item.color }};"></span>
+        <div class="cart-line-info">
+          <a href="{{ url_for('product_detail', product_id=item.id) }}">{{ item.name }}</a>
+          <span class="cart-line-origin">{{ item.origin }}</span>
+        </div>
+        <form class="cart-line-qty" action="{{ url_for('update_cart', product_id=item.id) }}" method="post">
+          <input type="number" name="qty" value="{{ item.qty }}" min="1" max="12" onchange="this.form.submit()">
+        </form>
+        <span class="cart-line-total">${{ '%.2f' | format(item.line_total) }}</span>
+        <form action="{{ url_for('remove_from_cart', product_id=item.id) }}" method="post">
+          <button type="submit" class="remove-btn" aria-label="Remove {{ item.name }}">&times;</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+
+    <aside class="receipt">
+      <p class="receipt-title">Order summary</p>
+      <div class="receipt-row"><span>Subtotal</span><span>${{ '%.2f' | format(cart.subtotal) }}</span></div>
+      <div class="receipt-row">
+        <span>Shipping</span>
+        <span>{% if cart.shipping == 0 %}Free{% else %}${{ '%.2f' | format(cart.shipping) }}{% endif %}</span>
+      </div>
+      {% if cart.shipping > 0 %}
+      <p class="receipt-note">Add ${{ '%.2f' | format(40 - cart.subtotal) }} more for free shipping.</p>
+      {% endif %}
+      <div class="receipt-divider"></div>
+      <div class="receipt-row receipt-total"><span>Total</span><span>${{ '%.2f' | format(cart.total) }}</span></div>
+      <a class="btn btn-primary btn-block" href="{{ url_for('checkout') }}">Checkout</a>
+    </aside>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

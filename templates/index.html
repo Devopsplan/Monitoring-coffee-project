@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}CoffeeCraft Roastery — Small-batch single origins{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Batch #114 &mdash; roasted this week</p>
+    <h1 class="hero-title">Coffee, traced back<br>to one farm, one lot,<br>one roast curve.</h1>
+    <p class="hero-sub">We buy in small lots directly from six growing regions, roast in
+      batches under 12kg, and ship within 48 hours of the drum. Nothing sits on a shelf.</p>
+    <a class="btn btn-primary" href="#catalog">Browse the catalog</a>
+  </div>
+</section>
+
+<section id="catalog" class="catalog wrap">
+  <div class="section-head">
+    <h2>Current lots</h2>
+    <p class="section-sub">Six origins, roasted light to dark. The dial on each bag shows how far it went.</p>
+  </div>
+
+  <div class="product-grid">
+    {% for p in products %}
+    <article class="product-card">
+      <a href="{{ url_for('product_detail', product_id=p.id) }}" class="card-top" style="--product-color: {{ p.color }};">
+        <svg class="roast-dial" viewBox="0 0 120 120" width="72" height="72" aria-hidden="true">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#3A2C21" stroke-width="10"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="{{ p.color }}" stroke-width="10"
+                  stroke-linecap="round"
+                  stroke-dasharray="{{ (p.roast / 5 * 314.16) | round(1) }} 314.16"
+                  transform="rotate(-90 60 60)"/>
+          <text x="60" y="68" text-anchor="middle" class="dial-label">{{ p.roast }}/5</text>
+        </svg>
+        <span class="card-badge">{{ roast_label(p.roast) }}</span>
+      </a>
+      <div class="card-body">
+        <h3><a href="{{ url_for('product_detail', product_id=p.id) }}">{{ p.name }}</a></h3>
+        <p class="card-origin">{{ p.origin }}</p>
+        <p class="card-notes">{{ p.notes | join(' &middot; ') | safe }}</p>
+        <div class="card-foot">
+          <span class="card-price">${{ '%.2f' | format(p.price) }}</span>
+          <form action="{{ url_for('add_to_cart', product_id=p.id) }}" method="post">
+            <input type="hidden" name="qty" value="1">
+            <input type="hidden" name="next" value="{{ url_for('index') }}">
+            <button type="submit" class="btn btn-small">Add to bag</button>
+          </form>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="about" class="about wrap">
+  <div class="about-grid">
+    <div>
+      <p class="eyebrow">How we work</p>
+      <h2>Traceable to the drum.</h2>
+      <p>Every bag lists the farm, altitude and process it came from, and the exact roast
+        level it was taken to. We keep lots under 40kg so a bag you buy in week one tastes
+        the same as one bought in week three.</p>
+    </div>
+    <dl class="stat-list">
+      <div><dt>6</dt><dd>growing regions in rotation</dd></div>
+      <div><dt>&lt;48h</dt><dd>from roast to shipment</dd></div>
+      <div><dt>12kg</dt><dd>max batch size per drum</dd></div>
+    </dl>
+  </div>
+</section>
+
+{% endblock %}
